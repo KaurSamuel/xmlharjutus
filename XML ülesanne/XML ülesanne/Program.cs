@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Xml;
 
 namespace XML_ülesanne
@@ -15,22 +16,23 @@ namespace XML_ülesanne
                 Console.WriteLine("1.Loo uus märge");
                 Console.WriteLine("2.Loe olemasolevaid märkmeid");
                 Console.WriteLine("3. Modifitseeri märkmeid");
-                int valik = int.Parse(Console.ReadLine());
-                if (valik == 1)
+                string valik = Console.ReadLine();
+                if (valik == "1")
                 {
                     Kirjutaja();
                 }
-                else if (valik == 2)
+                else if (valik == "2")
                 {
                     Lugeja();
                 }
-                else if (valik==3)
+                else if (valik=="3")
                 {
                     Modifitseeri();
                 }
                 else
                 {
                     Console.WriteLine("Do you even numbers?");
+                    Thread.Sleep(400);
                 }
             }
            
@@ -105,32 +107,72 @@ namespace XML_ülesanne
             Console.Clear();
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load("../../Notes.xml");
-            int Count = 1;
-            foreach (XmlNode node in xmlDoc.DocumentElement.ChildNodes)
+
+            Console.WriteLine("Kas tahate märget kustudada või muuta(k/m)");
+            string valik2 = Console.ReadLine();
+            if (valik2 == "m")
             {
-                Console.WriteLine(Count+ ". "+node.Attributes["Pealkiri"].Value);
-                Count += 1;
-            }
-            Console.WriteLine("Palun kirjutage märkme pealkiri mida te tahate modifitseerida.");
-            string valik = Console.ReadLine();
-            Console.Clear();
-            foreach (XmlNode node in xmlDoc.DocumentElement.ChildNodes)
-            {
-                if (node.Attributes["Pealkiri"].Value == valik)
+                
+                int Count = 1;
+                foreach (XmlNode node in xmlDoc.DocumentElement.ChildNodes)
                 {
-                    Console.WriteLine("Praegune märkme sisu: ");
-                    Console.WriteLine(node.Attributes["Sisu"].Value);
-                    Console.WriteLine("Uus märkme sisu: ");
-                    string uus_sisu = Console.ReadLine();
-                    node.Attributes["Sisu"].Value = uus_sisu;
-                    Console.WriteLine("Märge on muudetud!");
-                    xmlDoc.Save("../../Notes.xml");
-                    Console.ReadLine();
-                    return (0);
+                    Console.WriteLine(Count + ". " + node.Attributes["Pealkiri"].Value);
+                    Count += 1;
                 }
+                Console.WriteLine("Palun kirjutage märkme pealkiri mida te tahate modifitseerida.");
+                string valik = Console.ReadLine();
+                Console.Clear();
+                foreach (XmlNode node in xmlDoc.DocumentElement.ChildNodes)
+                {
+                    if (node.Attributes["Pealkiri"].Value == valik)
+                    {
+                        Console.WriteLine("Praegune märkme sisu: ");
+                        Console.WriteLine(node.Attributes["Sisu"].Value);
+                        Console.WriteLine("Uus märkme sisu: ");
+                        string uus_sisu = Console.ReadLine();
+                        node.Attributes["Sisu"].Value = uus_sisu;
+                        Console.WriteLine("Märge on muudetud!");
+                        xmlDoc.Save("../../Notes.xml");
+                        Console.ReadLine();
+                        return (0);
+                    }
+                }
+                Console.WriteLine("Ühtegi sellise nimega märget ei leidud!");
+                Console.ReadLine();
+                return (0);
             }
-            Console.WriteLine("Ühtegi sellise nimega märget ei leidud!");
-            Console.ReadLine();
+            else if (valik2 == "k")
+            {
+                int Count = 1;
+                foreach (XmlNode node in xmlDoc.DocumentElement.ChildNodes)
+                {
+                    Console.WriteLine(Count + ". " + node.Attributes["Pealkiri"].Value);
+                    Count += 1;
+                }
+                Console.WriteLine("Palun kirjutage märkme pealkiri mida te tahate kustutada.");
+                string valik = Console.ReadLine();
+                foreach (XmlNode node in xmlDoc.DocumentElement.ChildNodes)
+                {
+                    if (node.Attributes["Pealkiri"].Value == valik)
+                    {
+                        Console.WriteLine("oled kindel?(y/n)");
+                        string y_n = Console.ReadLine();
+                        if (y_n == "y")
+                        {
+                            node.ParentNode.RemoveChild(node);
+                        }
+                        else
+                        {
+                        }
+                    }
+                }
+                xmlDoc.Save("../../Notes.xml");
+            }
+            else
+            {
+                Console.WriteLine("You are a bit special arent you?");
+                Console.ReadLine();
+            }
             return (0);
         }
     }
