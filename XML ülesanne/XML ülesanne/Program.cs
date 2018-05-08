@@ -7,12 +7,14 @@ namespace XML_ülesanne
     {
         static void Main(string[] args)
         {
+            
             while (true)
             {
 
                 Console.Clear();
                 Console.WriteLine("1.Loo uus märge");
                 Console.WriteLine("2.Loe olemasolevaid märkmeid");
+                Console.WriteLine("3. Modifitseeri märkmeid");
                 int valik = int.Parse(Console.ReadLine());
                 if (valik == 1)
                 {
@@ -21,6 +23,10 @@ namespace XML_ülesanne
                 else if (valik == 2)
                 {
                     Lugeja();
+                }
+                else if (valik==3)
+                {
+                    Modifitseeri();
                 }
                 else
                 {
@@ -38,7 +44,7 @@ namespace XML_ülesanne
             xmlDoc.Load("../../Notes.xml");
             foreach (XmlNode xmlnode in xmlDoc.DocumentElement.ChildNodes)
             {
-                Console.WriteLine(xmlnode.Attributes["Pealkiri"].Value+ ": ");
+                Console.WriteLine("("+xmlnode.Attributes["Aeg"].Value + ") "+xmlnode.Attributes["Pealkiri"].Value+ ": ");
                 Console.WriteLine(xmlnode.Attributes["Sisu"].Value);
                 Console.WriteLine();
             }
@@ -68,6 +74,8 @@ namespace XML_ülesanne
             XmlNode markmed = xmlDoc.CreateElement("Note");
             XmlAttribute attribute1 = xmlDoc.CreateAttribute("Pealkiri");
             XmlAttribute attribute2 = xmlDoc.CreateAttribute("Sisu");
+            XmlAttribute aeg = xmlDoc.CreateAttribute("Aeg");
+            aeg.Value = DateTime.Now.ToString();
             Console.WriteLine("Palun sisestage uue märkme pealkiri.");
             attribute1.Value = Console.ReadLine();
             Console.Clear();
@@ -75,6 +83,7 @@ namespace XML_ülesanne
             attribute2.Value = Console.ReadLine();
             markmed.Attributes.Append(attribute1);
             markmed.Attributes.Append(attribute2);
+            markmed.Attributes.Append(aeg);
             rootnode.AppendChild(markmed);
             xmlDoc.Save("../../Notes.xml");
             
@@ -88,6 +97,41 @@ namespace XML_ülesanne
             //Pealkiri.AppendChild(Sisu);
             //xmlDoc.DocumentElement.AppendChild(Pealkiri);
             //xmlDoc.Save("../../Notes2.xml");
+        }
+
+
+        static int Modifitseeri()
+        {
+            Console.Clear();
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load("../../Notes.xml");
+            int Count = 1;
+            foreach (XmlNode node in xmlDoc.DocumentElement.ChildNodes)
+            {
+                Console.WriteLine(Count+ ". "+node.Attributes["Pealkiri"].Value);
+                Count += 1;
+            }
+            Console.WriteLine("Palun kirjutage märkme pealkiri mida te tahate modifitseerida.");
+            string valik = Console.ReadLine();
+            Console.Clear();
+            foreach (XmlNode node in xmlDoc.DocumentElement.ChildNodes)
+            {
+                if (node.Attributes["Pealkiri"].Value == valik)
+                {
+                    Console.WriteLine("Praegune märkme sisu: ");
+                    Console.WriteLine(node.Attributes["Sisu"].Value);
+                    Console.WriteLine("Uus märkme sisu: ");
+                    string uus_sisu = Console.ReadLine();
+                    node.Attributes["Sisu"].Value = uus_sisu;
+                    Console.WriteLine("Märge on muudetud!");
+                    xmlDoc.Save("../../Notes.xml");
+                    Console.ReadLine();
+                    return (0);
+                }
+            }
+            Console.WriteLine("Ühtegi sellise nimega märget ei leidud!");
+            Console.ReadLine();
+            return (0);
         }
     }
 }

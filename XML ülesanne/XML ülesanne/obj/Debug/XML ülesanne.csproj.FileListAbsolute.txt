@@ -5,3 +5,10 @@ c:\users\kaurs\source\repos\XML ülesanne\XML ülesanne\obj\Debug\XML ülesanne.
 c:\users\kaurs\source\repos\XML ülesanne\XML ülesanne\obj\Debug\XML ülesanne.csproj.CoreCompileInputs.cache
 c:\users\kaurs\source\repos\XML ülesanne\XML ülesanne\obj\Debug\XML ülesanne.exe
 c:\users\kaurs\source\repos\XML ülesanne\XML ülesanne\obj\Debug\XML ülesanne.pdb
+C:\Users\opilane\Documents\GitHub\xmlharjutus\XML ülesanne\XML ülesanne\bin\Debug\XML ülesanne.exe.config
+C:\Users\opilane\Documents\GitHub\xmlharjutus\XML ülesanne\XML ülesanne\bin\Debug\XML ülesanne.exe
+C:\Users\opilane\Documents\GitHub\xmlharjutus\XML ülesanne\XML ülesanne\bin\Debug\XML ülesanne.pdb
+C:\Users\opilane\Documents\GitHub\xmlharjutus\XML ülesanne\XML ülesanne\obj\Debug\XML ülesanne.csprojResolveAssemblyReference.cache
+C:\Users\opilane\Documents\GitHub\xmlharjutus\XML ülesanne\XML ülesanne\obj\Debug\XML ülesanne.csproj.CoreCompileInputs.cache
+C:\Users\opilane\Documents\GitHub\xmlharjutus\XML ülesanne\XML ülesanne\obj\Debug\XML ülesanne.exe
+C:\Users\opilane\Documents\GitHub\xmlharjutus\XML ülesanne\XML ülesanne\obj\Debug\XML ülesanne.pdb
