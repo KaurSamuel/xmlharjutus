@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace XML_ülesanne
 {
+    // ei kasuta
     class Note
     {
         public string Sisu { get; set; }

@@ -50,22 +50,10 @@ namespace XML_ülesanne
                 Console.WriteLine(xmlnode.Attributes["Sisu"].Value);
                 Console.WriteLine();
             }
-
-
-
-            //XmlReader xmlreader = XmlReader.Create("../../Notes.xml");
-            //while (xmlreader.Read())
-            //{
-            //    if ((xmlreader.NodeType == XmlNodeType.Element) &&
-            //        (xmlreader.Name == "Notes"))
-            //    {
-            //            Console.WriteLine(xmlreader.GetAttribute("Pealkiri")+
-            //                ": "+xmlreader.GetAttribute("Sisu"));
-            //    }
-            //}
-            Console.ReadKey();
+            Console.ReadLine();
         }
 
+        //************************************************************************************
 
         static void Kirjutaja()
         {
@@ -88,19 +76,9 @@ namespace XML_ülesanne
             markmed.Attributes.Append(aeg);
             rootnode.AppendChild(markmed);
             xmlDoc.Save("../../Notes.xml");
-            
-
-
-
-
-            //XmlNode Pealkiri = xmlDoc.CreateElement("Pealkiri");
-            //XmlNode Sisu = xmlDoc.CreateElement("Sisu");
-            //Sisu.InnerText = Console.ReadLine();
-            //Pealkiri.AppendChild(Sisu);
-            //xmlDoc.DocumentElement.AppendChild(Pealkiri);
-            //xmlDoc.Save("../../Notes2.xml");
         }
 
+        //*****************************************************************************************
 
         static int Modifitseeri()
         {
@@ -137,7 +115,7 @@ namespace XML_ülesanne
                         return (0);
                     }
                 }
-                Console.WriteLine("Ühtegi sellise nimega märget ei leidud!");
+                Console.WriteLine("Ühtegi sellise nimega märget ei leitud!");
                 Console.ReadLine();
                 return (0);
             }
@@ -164,6 +142,12 @@ namespace XML_ülesanne
                         else
                         {
                         }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Ühtegi sellise nimega märget ei leitud! ");
+                        Console.ReadLine();
+                        return (0);
                     }
                 }
                 xmlDoc.Save("../../Notes.xml");
